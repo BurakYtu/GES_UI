@@ -14,6 +14,7 @@ class gesui extends StatefulWidget {
 
 class _gesuiState extends State<gesui> {
   int _counter = 0;
+  int firabasedata = 0;
 
   void _incrementCounter() {
     setState(() {
@@ -37,6 +38,8 @@ class _gesuiState extends State<gesui> {
               '$_counter',
               style: Theme.of(context).textTheme.headline4,
             ),
+            Text('I read this value from Firebase:',style: TextStyle(fontSize: 20)),
+            Text(firabasedata.toString(),style: TextStyle(fontSize: 30)),
           ],
         ),
       ),
