@@ -51,6 +51,12 @@ class _HomepageState extends State<Homepage> {
     );
   }
 }
+
+
+
+
+
+
 /*
 
 Widget myCardDetails(String imageVal, String currencyName, List<double> data,
