@@ -83,6 +83,16 @@ class MapPage extends StatelessWidget {
                                 offsetLonTextBottom: 20.0,
                                 offsetLatTextLeft: 20.0,
                               ),
+                              new PolygonLayerOptions(
+                                  polygons: [
+                                    new Polygon(
+                                      points: points,
+                                      borderStrokeWidth: 2.0,
+                                      color: Colors.red.withOpacity(0.2),
+                                      borderColor: Colors.white,
+                                    ),
+                                  ]
+                              ),
                               new MarkerLayerOptions(
                                   markers: [
                                     new Marker(
@@ -106,7 +116,8 @@ class MapPage extends StatelessWidget {
                         Container(
                           child: new FlutterMap(options: new MapOptions(
                               minZoom: 15.5,
-                              center: new LatLng(38.393861, 34.976809)),
+                              center: new LatLng(38.393861, 34.976809),
+                          ),
                             layers: [new TileLayerOptions(
                                 urlTemplate: 'https://api.mapbox.com/styles/v1/burakgzl/ckod79pe10j3b17olhtqngf18/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiYnVyYWtnemwiLCJhIjoiY2tvZDc0bm0wMHhhYjJ4b2RkNnZqMXBtaSJ9.mFmYbfjJGySQe1fAzc3O4Q', //http://{s}.tile.openstreetmap.de/tiles/osmde/{z}/{x}/{y}.png
                                 additionalOptions: {
