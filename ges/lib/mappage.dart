@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong/latlong.dart';
 import 'package:lat_lon_grid_plugin/lat_lon_grid_plugin.dart';
+import 'analyticspage.dart';
 
 class MapPage extends StatelessWidget {
 
@@ -68,8 +69,8 @@ class MapPage extends StatelessWidget {
                             layers: [new TileLayerOptions(
                                 urlTemplate: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
                                 subdomains: ['a','b','c']
-                            ),
-                              MapPluginLatLonGridOptions(
+                            ),//
+                              /*MapPluginLatLonGridOptions(
                                 lineColor: Colors.black38,
                                 textColor: Colors.white,
                                 lineWidth: 0.5,
@@ -82,7 +83,7 @@ class MapPage extends StatelessWidget {
                                 placeLabelsOnLines: true,
                                 offsetLonTextBottom: 20.0,
                                 offsetLatTextLeft: 20.0,
-                              ),
+                              ),*/
                               new PolygonLayerOptions(
                                   polygons: [
                                     new Polygon(
@@ -96,15 +97,25 @@ class MapPage extends StatelessWidget {
                               new MarkerLayerOptions(
                                   markers: [
                                     new Marker(
-                                        width: 10.0,
-                                        height: 10.0,
-                                        point: new LatLng(38.3947500, 34.9781250),
+                                        point: new LatLng(38.396343, 34.976836),
                                         builder: (context) => new Container(
                                           child: IconButton(
-                                            icon: Icon(Icons.location_on),
-                                            color: Colors.orange,
-                                            iconSize: 45,
-                                            onPressed: (){},
+                                            icon: Icon(Icons.info),
+                                            color: Colors.pink.withOpacity(0.7),
+                                            iconSize: 50,
+                                            onPressed: (){
+                                              showModalBottomSheet(
+                                                  context: context,
+                                                  builder: (builder){
+                                                    return Container(
+                                                      color: Colors.white,
+                                                        child: new Center(
+                                                          child: new Text("Details"),
+                                                        ),
+                                                    );
+                                                  },
+                                              );
+                                            },
                                           ),
                                         )
                                     )
@@ -137,15 +148,17 @@ class MapPage extends StatelessWidget {
                               new MarkerLayerOptions(
                                   markers: [
                                     new Marker(
-                                        width: 10.0,
-                                        height: 10.0,
                                         point: new LatLng(38.392861, 34.972809),
                                         builder: (context) => new Container(
                                           child: IconButton(
                                             icon: Icon(Icons.location_on),
-                                            color: Colors.red,
-                                            iconSize: 45,
-                                            onPressed: (){},
+                                            color: Colors.green,
+                                            iconSize: 60,
+                                            onPressed: (){
+                                              Navigator.of(context).push(MaterialPageRoute(
+                                                builder: (context) => AnalyticsPage(),
+                                              ));
+                                            },
                                           ),
                                         )
                                     ),
