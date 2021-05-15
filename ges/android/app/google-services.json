@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "409963116619",
+    "project_id": "gesdata-e856b",
+    "storage_bucket": "gesdata-e856b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:409963116619:android:27e5e32faee7c2165fb5ce",
+        "android_client_info": {
+          "package_name": "com.example.ges"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "409963116619-45nbp8utnjpqgppbmc8v54dlpjcr92c1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCjOu_iAy9rvy2tKPkTA-ao581-crwQgwA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "409963116619-45nbp8utnjpqgppbmc8v54dlpjcr92c1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -15,6 +15,54 @@ class MapPage extends StatelessWidget {
     new LatLng(38.395883, 34.975348),
   ];
 
+  var points2 = <LatLng>[
+    new LatLng(38.394595, 34.974125),
+    new LatLng(38.394930, 34.975452),
+    new LatLng(38.394055, 34.975989),
+    new LatLng(38.393589, 34.974473),
+    new LatLng(38.394595, 34.974125),
+  ];
+
+  var points3 = <LatLng>[
+    new LatLng(38.394197, 34.977613),
+    new LatLng(38.394300, 34.979288),
+    new LatLng(38.393220, 34.979462),
+    new LatLng(38.393123, 34.977845),
+    new LatLng(38.394197, 34.977613),
+  ];
+
+  var points4 = <LatLng>[
+    new LatLng(38.393339, 34.974698),
+    new LatLng(38.393350, 34.976294),
+    new LatLng(38.393061, 34.976286),
+    new LatLng(38.393049, 34.975989),
+    new LatLng(38.392731, 34.975960),
+    new LatLng(38.392703, 34.976286),
+    new LatLng(38.392288, 34.976279),
+    new LatLng(38.392254, 34.974713),
+    new LatLng(38.393339, 34.974698),
+  ];
+
+  var points5 = <LatLng>[
+    new LatLng(38.392401, 34.972617),
+    new LatLng(38.392697, 34.973009),
+    new LatLng(38.392106, 34.973886),
+    new LatLng(38.392003, 34.975068),
+    new LatLng(38.391196, 34.974488),
+    new LatLng(38.391617, 34.973310),
+    new LatLng(38.392401, 34.972617),
+  ];
+
+  var points6 = <LatLng>[
+    new LatLng(38.392003, 34.975365),
+    new LatLng(38.391884, 34.976932),
+    new LatLng(38.391236, 34.977048),
+    new LatLng(38.391088, 34.975358),
+    new LatLng(38.391384, 34.974923),
+    new LatLng(38.391743, 34.975316),
+    new LatLng(38.392003, 34.975365),
+  ];
+
   @override
   Widget build(BuildContext context) => Scaffold(
     //drawer: NavigationDrawerWidget(),
@@ -100,7 +148,7 @@ class MapPage extends StatelessWidget {
                                         point: new LatLng(38.396343, 34.976836),
                                         builder: (context) => new Container(
                                           child: IconButton(
-                                            icon: Icon(Icons.info),
+                                            icon: Icon(Icons.location_on),
                                             color: Colors.pink.withOpacity(0.7),
                                             iconSize: 50,
                                             onPressed: (){
@@ -125,11 +173,13 @@ class MapPage extends StatelessWidget {
                           ),
                         ),
                         Container(
-                          child: new FlutterMap(options: new MapOptions(
-                              minZoom: 15.5,
-                              center: new LatLng(38.393861, 34.976809),
+                          child: new FlutterMap(
+                            options: new MapOptions(
+                              minZoom: 16,
+                              center: new LatLng(38.393861, 34.975809),
                           ),
-                            layers: [new TileLayerOptions(
+                            layers: [
+                              new TileLayerOptions(
                                 urlTemplate: 'https://api.mapbox.com/styles/v1/burakgzl/ckod79pe10j3b17olhtqngf18/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiYnVyYWtnemwiLCJhIjoiY2tvZDc0bm0wMHhhYjJ4b2RkNnZqMXBtaSJ9.mFmYbfjJGySQe1fAzc3O4Q', //http://{s}.tile.openstreetmap.de/tiles/osmde/{z}/{x}/{y}.png
                                 additionalOptions: {
                                   'accessToken' : 'pk.eyJ1IjoiYnVyYWtnemwiLCJhIjoiY2tvZDc4ZDZiM3hldTJwbXZscjZreHA2dCJ9.YNBMFtlCdue00yCopDIsxg',
@@ -141,19 +191,63 @@ class MapPage extends StatelessWidget {
                                   new Polyline(
                                     points: points,
                                     strokeWidth: 2.0,
-                                    color: Colors.blue,
+                                    color: Colors.red,
+                                  ),
+                                  new Polyline(
+                                    points: points2,
+                                    strokeWidth: 2.0,
+                                    color: Colors.red,
+                                  ),
+                                  new Polyline(
+                                    points: points3,
+                                    strokeWidth: 2.0,
+                                    color: Colors.green,
+                                  ),
+                                  new Polyline(
+                                    points: points4,
+                                    strokeWidth: 2.0,
+                                    color: Colors.green,
+                                  ),
+                                  new Polyline(
+                                    points: points5,
+                                    strokeWidth: 2.0,
+                                    color: Colors.green,
+                                  ),
+                                  new Polyline(
+                                    points: points6,
+                                    strokeWidth: 2.0,
+                                    color: Colors.red,
                                   )
                                 ]
                               ),
                               new MarkerLayerOptions(
                                   markers: [
                                     new Marker(
-                                        point: new LatLng(38.392861, 34.972809),
+                                        width: 40.0,
+                                        height: 40.0,
+                                        point: new LatLng(38.395883, 34.975348),
                                         builder: (context) => new Container(
                                           child: IconButton(
-                                            icon: Icon(Icons.location_on),
-                                            color: Colors.green,
-                                            iconSize: 60,
+                                            icon: Icon(Icons.info),
+                                            color: Colors.red,
+                                            iconSize: 40,
+                                            onPressed: (){
+                                              Navigator.of(context).push(MaterialPageRoute(
+                                                  builder: (context) => AnalyticsPage(),
+                                              ));
+                                            },
+                                          ),
+                                        )
+                                    ),
+                                    new Marker(
+                                        width: 40.0,
+                                        height: 40.0,
+                                        point: new LatLng(38.394595, 34.974125),
+                                        builder: (context) => new Container(
+                                          child: IconButton(
+                                            icon: Icon(Icons.info),
+                                            color: Colors.red,
+                                            iconSize: 40,
                                             onPressed: (){
                                               Navigator.of(context).push(MaterialPageRoute(
                                                 builder: (context) => AnalyticsPage(),
@@ -163,18 +257,73 @@ class MapPage extends StatelessWidget {
                                         )
                                     ),
                                     new Marker(
-                                        width: 10.0,
-                                        height: 10.0,
-                                        point: new LatLng(38.3947500, 34.9781250),
+                                        width: 40.0,
+                                        height: 40.0,
+                                        point: new LatLng(38.394197, 34.977613),
                                         builder: (context) => new Container(
                                           child: IconButton(
-                                            icon: Icon(Icons.location_on),
-                                            color: Colors.red,
-                                            iconSize: 45,
-                                            onPressed: (){},
+                                            icon: Icon(Icons.assignment_turned_in_rounded),
+                                            color: Colors.green,
+                                            iconSize: 40,
+                                            onPressed: (){
+                                              Navigator.of(context).push(MaterialPageRoute(
+                                                builder: (context) => AnalyticsPage(),
+                                              ));
+                                            },
                                           ),
                                         )
-                                    )
+                                    ),
+                                    new Marker(
+                                        width: 40.0,
+                                        height: 40.0,
+                                        point: new LatLng(38.393339, 34.974698),
+                                        builder: (context) => new Container(
+                                          child: IconButton(
+                                            icon: Icon(Icons.assignment_turned_in_rounded),
+                                            color: Colors.green,
+                                            iconSize: 40,
+                                            onPressed: (){
+                                              Navigator.of(context).push(MaterialPageRoute(
+                                                builder: (context) => AnalyticsPage(),
+                                              ));
+                                            },
+                                          ),
+                                        )
+                                    ),
+                                    new Marker(
+                                        width: 40.0,
+                                        height: 40.0,
+                                        point: new LatLng(38.392401, 34.972617),
+                                        builder: (context) => new Container(
+                                          child: IconButton(
+                                            icon: Icon(Icons.assignment_turned_in_rounded),
+                                            color: Colors.green,
+                                            iconSize: 40,
+                                            onPressed: (){
+                                              Navigator.of(context).push(MaterialPageRoute(
+                                                builder: (context) => AnalyticsPage(),
+                                              ));
+                                            },
+                                          ),
+                                        )
+                                    ),
+                                    new Marker(
+                                        width: 40.0,
+                                        height: 40.0,
+                                        point: new LatLng(38.392003, 34.975365),
+                                        builder: (context) => new Container(
+                                          child: IconButton(
+                                            icon: Icon(Icons.info),
+                                            color: Colors.red,
+                                            iconSize: 40,
+                                            onPressed: (){
+                                              Navigator.of(context).push(MaterialPageRoute(
+                                                builder: (context) => AnalyticsPage(),
+                                              ));
+                                            },
+                                          ),
+                                        )
+                                    ),
                                   ]
                               )
                             ],
