@@ -12,6 +12,8 @@ class AnalyticsPage extends StatelessWidget {
     ),
     body: Center(
       child: Container(
+        width: 300,
+        height: 600,
         child: GridView.count(
           scrollDirection: Axis.vertical,
           crossAxisCount: 1,
@@ -21,8 +23,8 @@ class AnalyticsPage extends StatelessWidget {
               builder: (context, snapshot){
                 if(snapshot.connectionState == ConnectionState.done){
                   return Container(
-                    width: MediaQuery.of(context).size.width / 1.2,
-                    height: MediaQuery.of(context).size.height / 1.2,
+                    //width: MediaQuery.of(context).size.width / 1.2,
+                    //height: MediaQuery.of(context).size.height / 1.2,
                     child: snapshot.data,
                   );
                 }
@@ -67,7 +69,10 @@ class AnalyticsPage extends StatelessWidget {
     await FireStorageService.loadImage(context, imageName).then((value){
      image = Image.network(
        value.toString(),
-       fit: BoxFit.scaleDown,
+       //height: 200,
+       //width: 200,
+       //scale: 5,
+       fit: BoxFit.fill,
      );
     });
     return image;
