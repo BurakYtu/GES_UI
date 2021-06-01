@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ges/main.dart';
+import 'analyticspage.dart';
 import 'myflexiableappbar.dart';
 import 'myappbar.dart';
 import 'package:ges/sidebar.dart';
@@ -11,8 +12,36 @@ class Homepage extends StatefulWidget {
 
 class _HomepageState extends State<Homepage> {
 
+  static const List<List<String>> PVSections = [
+    [
+      'https://senerji.istanbul/wp-content/uploads/2021/03/roof-top-solar-1-1170x820-1.jpg',
+      'Herşey Güzel Görünüyor',
+    ],
+    [
+      'https://socalsolarpro.com/wp-content/uploads/2017/05/Solar-Bird-Poop-Cleaning.jpg',
+      'Martılar Basmış !!!',
+    ],
+    [
+      'https://4.imimg.com/data4/KE/MP/MY-16227556/thermalimage1_solarpanel1_iz-500x500.jpg',
+      'Etek Temizliği Lazım',
+    ],
+    [
+      'http://www.bdg-usa.com/wp-content/uploads/2017/06/drone-thermal-imaging-solar-panel-inspection-2-300x240.jpg',
+      'Doğu Taraf Yanıyor Hadi iyisin',
+    ],
+    [
+      'https://abjdrones.com/wp-content/uploads/2018/04/Thermal-Solar-Panel-Inspection-Services_2.jpg',
+      'HotSpot mu o?',
+    ],
+    [
+      'https://images.theecoexperts.co.uk/wp-content/uploads/2020/03/solar-thermal-1.jpeg',
+      'İki Panel için yordun beni',
+    ]
+  ];
+
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       backgroundColor: Color(0XFF34495E),
       drawer: SideBar(),
@@ -30,21 +59,9 @@ class _HomepageState extends State<Homepage> {
           SliverList(
             delegate: SliverChildBuilderDelegate(
               (BuildContext context, int index) {
-            return Container(
-              color: index.isOdd ? Colors.white70 : Colors.blueGrey,
-              height: 100.0,
-              child: Center(
-                child: Text(
-                    '$index',
-                    textScaleFactor: 5,
-                  style: TextStyle(
-                    color: Colors.white70
-                  ),
-                ),
-              ),
-            );
+            return _buildListItem(context, PVSections[index]);
           },
-          childCount: 20,),
+          childCount: 6,),
           ),
         ],
       ),
@@ -53,6 +70,43 @@ class _HomepageState extends State<Homepage> {
 }
 
 
+Card _buildListItem(BuildContext context, List<String> PVstatus) {
+  return Card(
+    margin: const EdgeInsets.all(5),
+    child: Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Material(
+            child: InkWell(
+              onTap: (){
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => AnalyticsPage()),
+                );
+              },
+              child: Image(
+                width: 200,
+                image: NetworkImage(PVstatus[0]),
+              ),
+            )
+        ),
+        Expanded(
+          child: Padding(
+            padding: const EdgeInsets.only(
+                left: 10, right: 10, bottom: 10, top: 0),
+            child: Text(
+              PVstatus[1],
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+        ),
+      ],
+    ),
+  );
+}
 
 
 
