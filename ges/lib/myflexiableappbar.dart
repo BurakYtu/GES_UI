@@ -77,7 +77,7 @@ class MyFlexiableAppBar extends StatelessWidget {
                     Container(child: Padding(
                       padding: const EdgeInsets.only(bottom: 8.0,left:8.0),
                       child: new Text(
-                          "Currency",
+                          "SIMULAB",
                           style: const TextStyle(
                               color: Colors.white70,
                               fontFamily: 'Poppins',

@@ -108,15 +108,20 @@ class MapPage extends StatelessWidget {
                         Container(
                           child: new FlutterMap(
                             options: new MapOptions(
-                              minZoom: 15.5,
+                              minZoom: 16,
+                              maxZoom: 50,
                               center: new LatLng(38.393861, 34.976809),
                               plugins: [
                                 MapPluginLatLonGrid(),
                               ],
                           ),
                             layers: [new TileLayerOptions(
-                                urlTemplate: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-                                subdomains: ['a','b','c']
+                              urlTemplate: 'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw',
+                                additionalOptions: {
+                                  'id': 'mapbox.satellite'
+                                }
+                                //urlTemplate: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+                                //subdomains: ['a','b','c']
                             ),//
                               /*MapPluginLatLonGridOptions(
                                 lineColor: Colors.black38,
@@ -176,6 +181,7 @@ class MapPage extends StatelessWidget {
                           child: new FlutterMap(
                             options: new MapOptions(
                               minZoom: 16,
+                              maxZoom: 50,
                               center: new LatLng(38.393861, 34.975809),
                           ),
                             layers: [
