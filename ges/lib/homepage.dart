@@ -73,38 +73,34 @@ class _HomepageState extends State<Homepage> {
 Card _buildListItem(BuildContext context, List<String> PVstatus) {
   return Card(
     margin: const EdgeInsets.all(5),
-    child: Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Material(
-            child: InkWell(
-              onTap: (){
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => AnalyticsPage()),
-                );
-              },
-              child: Image(
-                width: 200,
-                image: NetworkImage(PVstatus[0]),
-              ),
-            )
-        ),
-        Expanded(
-          child: Padding(
-            padding: const EdgeInsets.only(
-                left: 10, right: 10, bottom: 10, top: 0),
-            child: Text(
-              PVstatus[1],
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
+    child: new Stack(
+        children: <Widget>[
+          new Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisSize: MainAxisSize.max,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                new Image.network(
+                  PVstatus[0],
+                  fit:BoxFit.fill,
+                  width: 125.0,
+                  height: 125.0,
+                ),
+                new Text(
+                  PVstatus[1],
+                  style: new TextStyle(fontSize:18.0,
+                      color: const Color(0xFF000000),
+                      fontWeight: FontWeight.w400,
+                      fontFamily: "Roboto"),
+                )
+              ]
           ),
-        ),
-      ],
-    ),
+          new FlatButton(key:null, onPressed: ()=>{Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => AnalyticsPage()),
+          )}, child: null,color: Colors.transparent,height: 125,minWidth: 350,),
+        ]
+    )
   );
 }
 
