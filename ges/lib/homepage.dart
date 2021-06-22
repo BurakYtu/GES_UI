@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:ges/main.dart';
-import 'analyticspage.dart';
+import 'myflexiableappbar.dart';
+import 'myappbar.dart';
+import 'package:ges/sidebar.dart';
 import 'detail_1_page.dart';
 import 'detail_2_page.dart';
 import 'detail_3_page.dart';
 import 'detail_4_page.dart';
 import 'detail_5_page.dart';
 import 'detail_6_page.dart';
-import 'myflexiableappbar.dart';
-import 'myappbar.dart';
-import 'package:ges/sidebar.dart';
 
 class Homepage extends StatefulWidget {
   @override
@@ -57,26 +55,110 @@ class _HomepageState extends State<Homepage> {
     return Scaffold(
       backgroundColor: Color(0XFF34495E),
       drawer: SideBar(),
-      body: CustomScrollView(
-        slivers: <Widget>[
-          SliverAppBar(
-            backgroundColor: Color(0XFF34495E),
-            title: MyAppBar(),
-            pinned: true,
-            expandedHeight: 250,
-            flexibleSpace: FlexibleSpaceBar(
-              background: MyFlexiableAppBar(),
+      body: Container(
+        decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: new Alignment(-1.0, -0.1),
+              end: new Alignment(1.0, 0.5),
+              colors: [
+                const Color(0xFF898989),
+                const Color(0xFF303030),
+              ],
+              stops: [
+                0.0,
+                1.0,
+              ],
+            )
+        ),
+        child: Column(
+          children: <Widget>[
+            Container(
+              margin: EdgeInsets.only(bottom: 25),
+              height: 150,
+              child: Stack(
+                children: <Widget>[
+                  Container(
+                    padding: EdgeInsets.only(
+                      left: 20.0,
+                      right: 20.0,
+                    ),
+                    //height: 200,
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                          colors: [
+                            const Color(0xFFffffff),
+                            const Color(0xFFa8a8a8),
+                          ]
+                      ),
+                      borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(36),
+                        bottomRight: Radius.circular(36),
+                      ),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.75),
+                          blurRadius: 20.0,
+                          spreadRadius: 5.0,
+                          offset: Offset(1.0, 1.0), // shadow direction: bottom right
+                        )
+                      ],
+                    ),
+                  )
+                ],
+              ),
             ),
-          ),
-          SliverList(
-            delegate: SliverChildBuilderDelegate(
-                  (BuildContext context, int index) {
-                return _buildListItem(context, PVSections[index]);
-              },
-              childCount: 6,),
-          ),
-        ],
-      ),
+            SizedBox(
+              height: 320,
+              width: 300,
+              child: Container(
+                child: Column(
+                    children: <Widget>[
+                      SizedBox(
+                        height: 70,
+                        width: 300,
+                        child: Container(
+                          color: Colors.black.withOpacity(0.6),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      SizedBox(
+                        height: 70,
+                        width: 300,
+                        child: Container(
+                          color: Colors.black.withOpacity(0.6),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      SizedBox(
+                        height: 70,
+                        width: 300,
+                        child: Container(
+                          color: Colors.black.withOpacity(0.6),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      SizedBox(
+                        height: 70,
+                        width: 300,
+                        child: Container(
+                          color: Colors.black.withOpacity(0.6),
+                        ),
+                      ),
+                    ]
+                ),
+              ),
+            )
+          ],
+        ),
+      )
     );
   }
 }
@@ -145,3 +227,12 @@ Card _buildListItem(BuildContext context, List<String> PVstatus) {
       )
   );
 }
+
+/*
+new Image.network(
+                        'https://cdn.icon-icons.com/icons2/2107/PNG/512/file_type_flutter_icon_130599.png',
+                        fit:BoxFit.fill,
+                        width: 100.0,
+                        height: 100.0,
+                      ),
+ */
