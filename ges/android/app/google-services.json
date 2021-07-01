@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "502351237007",
+    "project_id": "ges-cloud-461dc",
+    "storage_bucket": "ges-cloud-461dc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:502351237007:android:fe073d1664205ebb49c5fa",
+        "android_client_info": {
+          "package_name": "com.example.ges"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "502351237007-sni7pq8vmlrfvv6csmotjudduj2iiqll.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAglulL59m7EKUTvfYBND5CLVQEnXNBWGM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "502351237007-sni7pq8vmlrfvv6csmotjudduj2iiqll.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

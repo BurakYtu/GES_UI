@@ -1,53 +1,56 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:ges/theme.dart';
+import 'package:provider/provider.dart';
+import 'Functions/Authentication.dart';
+import 'Screens/Signup.dart';
+import 'Screens/Welcome.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
-void main(){
-  runApp(MaterialApp(
-    debugShowCheckedModeBanner: false,
-    home: gesui(),
-  ));
+import 'Screens/login.dart';
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(MyApp());
 }
 
-class gesui extends StatefulWidget {
-  @override
-  _gesuiState createState() => _gesuiState();
-}
-
-class _gesuiState extends State<gesui> {
-  int _counter = 0;
-  int firabasedata = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-            Text('I read this value from Firebase:',style: TextStyle(fontSize: 20)),
-            Text(firabasedata.toString(),style: TextStyle(fontSize: 30)),
-          ],
+    return MultiProvider(
+      providers: [
+        Provider<AuthenticationService>(
+          create: (_) => AuthenticationService(FirebaseAuth.instance),
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
+        StreamProvider(
+          create: (context) => context.read<AuthenticationService>().authStateChanges,
+        )
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          primaryColor: kPrimaryColor,
+          scaffoldBackgroundColor: Colors.white,
+        ),
+        home: AuthenticationWrapper(),
       ),
     );
+  }
+}
+
+class AuthenticationWrapper extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return SignUpScreen();
+    /*
+    final firebaseUser = context.watch<User>();
+
+    if (firebaseUser != null) {
+      return WelcomeScreen();
+    }
+    return LoginScreen();
+
+ */
   }
 }
