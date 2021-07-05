@@ -1,19 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:ges/rounded_button.dart';
-import 'package:ges/rounded_input_field.dart';
-import 'package:ges/rounded_password_field.dart';
-import 'package:ges/social_icon.dart';
 import 'package:ges/theme.dart';
-import 'Authentication.dart';
 import 'already_have_an_account_acheck.dart';
 import 'login.dart';
-import 'package:provider/provider.dart';
 
-class SignUpScreen extends StatelessWidget {
+class SignUpScreen extends StatefulWidget {
+  @override
+  _SignUpScreenState createState() => _SignUpScreenState();
+}
+
+class _SignUpScreenState extends State<SignUpScreen> {
   String email = "";
   String password = "";
+  bool _obscureText = true;
+
+  void _toggle() {
+    setState(() {
+      _obscureText = !_obscureText;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,83 +32,141 @@ class SignUpScreen extends StatelessWidget {
             children: <Widget>[
               Text(
                 "SIGNUP",
-                style: TextStyle(fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
               ),
               SizedBox(height: size.height * 0.03),
               SvgPicture.asset("lib/assets/signup.svg", height: size.height * 0.2,),
-              SizedBox(height: size.height * 0.03),
-              TextField(
-                onChanged: (text) {
-                  email = text;
-                },
-                cursorColor: kPrimaryColor,
-                decoration: InputDecoration(
-                  hintText: "e-mail",
-                  border: InputBorder.none,
-                ),
-              ),
-              TextField(
-                onChanged: (text) {
-                  password = text;
-                },
-                cursorColor: kPrimaryColor,
-                decoration: InputDecoration(
-                  hintText: "password",
-                  border: InputBorder.none,
-                ),
-              ),
-              // ignore: deprecated_member_use
-              FlatButton(
-                onPressed: () async {
-                  try {
-                    UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
-                      email: email,
-                      password: password,
-                    );
-
-                    showDialog(context: context, builder: (BuildContext context) => AlertDialog(
-                      title: const Text('Done'),
-                      content: const Text('Welcome to our world!'),
-                      actions: <Widget>[
-                        TextButton(
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) {
-                                  return LoginScreen();
-                                },
-                              ),
-                            );
-                          },
-                          child: const Text('Thanks :)'),
-                        ),
-                      ],
+              SizedBox(height: size.height * 0.04),
+              Container(
+                margin: EdgeInsets.symmetric(vertical: 10),
+                width: size.width * 0.8,
+                child: TextFormField(
+                  onChanged: (text) {
+                    email = text;
+                  },
+                  decoration: InputDecoration(
+                    prefixIcon: Icon(Icons.mail_outline, color: kPrimaryColor),
+                    fillColor: kPrimaryLightColor,
+                    labelText: "Enter Email",
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(30.0),
+                      borderSide: BorderSide(color: Colors.blue, width: 2.0),
                     ),
-                    );
-
-                  } on FirebaseAuthException catch (e) {
-                    showDialog(context: context, builder: (BuildContext context) => AlertDialog(
-                      title: const Text('Error'),
-                      content: const Text('we have a problem guys'),
-                      actions: <Widget>[
-                        TextButton(
-                          onPressed: () => Navigator.pop(context),
-                          child: const Text('try again'),
-                        ),
-                      ],
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(30.0),
+                      borderSide: BorderSide(color: kPrimaryLightColor, width: 2.0),
                     ),
-                    );
-                    if (e.code == 'weak-password') {
-                      print('The password provided is too weak.');
-                    } else if (e.code == 'email-already-in-use') {
-                      print('The account already exists for that email.');
+                  ),
+                  validator: (val) {
+                    if(val.length==0) {
+                      return "Email cannot be empty";
+                    }else{
+                      return null;
                     }
-                  } catch (e) {
-                    print(e);
-                  }
-                },
-                child: Text("SingUp"),
+                  },
+                  keyboardType: TextInputType.emailAddress,
+                  style: new TextStyle(
+                    fontFamily: "Poppins",
+                  ),
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.symmetric(vertical: 10),
+                width: size.width * 0.8,
+                child: TextFormField(
+                  obscureText: _obscureText,
+                  onChanged: (text) {
+                    password = text;
+                  },
+                  decoration: InputDecoration(
+                    prefixIcon: IconButton(
+                      color: kPrimaryColor,
+                      icon: Icon(Icons.vpn_key_outlined),
+                      onPressed: (){
+                        _toggle();
+                      },
+                    ),
+                    labelText: "Enter Password",
+                    fillColor: Colors.white,
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(30.0),
+                      borderSide: BorderSide(color: Colors.blue, width: 2.0),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(30.0),
+                      borderSide: BorderSide(color: kPrimaryLightColor, width: 2.0),
+                    ),
+                  ),
+                  validator: (val) {
+                    if(val.length==0) {
+                      return "Password cannot be empty";
+                    }else{
+                      return null;
+                    }
+                  },
+                  keyboardType: TextInputType.emailAddress,
+                  style: new TextStyle(
+                    fontFamily: "Poppins",
+                  ),
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.symmetric(vertical: 10),
+                width: size.width * 0.8,
+                height: size.width * 0.15,
+                child: OutlinedButton(
+                  style: ButtonStyle(
+                    shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0))),
+                  ),
+                  onPressed: () async {
+                    try {
+                      UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+                        email: email,
+                        password: password,
+                      );
+                      showDialog(context: context, builder: (BuildContext context) => AlertDialog(
+                        title: const Text('Done'),
+                        content: const Text('Welcome to our world!'),
+                        actions: <Widget>[
+                          TextButton(
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) {
+                                    return LogInScreen();
+                                  },
+                                ),
+                              );
+                            },
+                            child: const Text('Thanks :)'),
+                          ),
+                        ],
+                      ),
+                      );
+                    } on FirebaseAuthException catch (e) {
+                      showDialog(context: context, builder: (BuildContext context) => AlertDialog(
+                        title: const Text('Error'),
+                        content: const Text('we have a problem guys'),
+                        actions: <Widget>[
+                          TextButton(
+                            onPressed: () => Navigator.pop(context),
+                            child: const Text('try again'),
+                          ),
+                        ],
+                      ),
+                      );
+                      if (e.code == 'weak-password') {
+                        print('The password provided is too weak.');
+                      } else if (e.code == 'email-already-in-use') {
+                        print('The account already exists for that email.');
+                      }
+                    } catch (e) {
+                      print(e);
+                    }
+                  },
+                  child: Text("Sing Up"),
+                ),
               ),
               SizedBox(height: size.height * 0.03),
               AlreadyHaveAnAccountCheck(
@@ -111,54 +175,10 @@ class SignUpScreen extends StatelessWidget {
                   Navigator.pop(context);
                 },
               ),
-              Container(
-                margin: EdgeInsets.symmetric(vertical: size.height * 0.02), width: size.width * 0.8,
-                child: Row(
-                  children: <Widget>[
-                    buildDivider(),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 10),
-                      child: Text("OR",
-                        style: TextStyle(
-                          color: kPrimaryColor,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ),
-                    buildDivider(),
-                  ],
-                ),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  SocalIcon(
-                    iconSrc: "lib/assets/facebook.svg",
-                    press: () {},
-                  ),
-                  SocalIcon(
-                    iconSrc: "lib/assets/twitter.svg",
-                    press: () {},
-                  ),
-                  SocalIcon(
-                    iconSrc: "lib/assets/google-plus.svg",
-                    press: () {},
-                  ),
-                ],
-              )
             ],
           ),
         ),
       ),
     );
   }
-}
-
-Expanded buildDivider() {
-  return Expanded(
-    child: Divider(
-      color: Color(0xFFD9D9D9),
-      height: 1.5,
-    ),
-  );
 }

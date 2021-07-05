@@ -8,9 +8,21 @@ import 'package:provider/provider.dart';
 import 'Authentication.dart';
 import 'already_have_an_account_acheck.dart';
 
-class LoginScreen extends StatelessWidget {
+class LogInScreen extends StatefulWidget {
+  @override
+  _LogInScreenState createState() => _LogInScreenState();
+}
+
+class _LogInScreenState extends State<LogInScreen> {
   String loginemail = "";
   String loginpassword = "";
+  bool _obscureText = true;
+
+  void _toggle() {
+    setState(() {
+      _obscureText = !_obscureText;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,37 +39,77 @@ class LoginScreen extends StatelessWidget {
               ),
               SizedBox(height: size.height * 0.03), SvgPicture.asset("lib/assets/login.svg", height: size.height * 0.25,),
               SizedBox(height: size.height * 0.03),
-              TextField(
-                onChanged: (text) {
-                  loginemail = text;
-                },
-                cursorColor: kPrimaryColor,
-                decoration: InputDecoration(
-                  icon: Icon(
-                    Icons.assignment_ind_outlined,
-                    color: kPrimaryColor,
+              Container(
+                margin: EdgeInsets.symmetric(vertical: 10),
+                width: size.width * 0.8,
+                child: TextFormField(
+                  onChanged: (text) {
+                    loginemail = text;
+                  },
+                  decoration: InputDecoration(
+                    prefixIcon: Icon(Icons.mail_outline, color: kPrimaryColor),
+                    fillColor: kPrimaryLightColor,
+                    labelText: "Enter Email",
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(30.0),
+                      borderSide: BorderSide(color: Colors.blue, width: 2.0),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(30.0),
+                      borderSide: BorderSide(color: kPrimaryLightColor, width: 2.0),
+                    ),
                   ),
-                  hintText: "e-mail",
-                  border: InputBorder.none,
+                  validator: (val) {
+                    if(val.length==0) {
+                      return "Email cannot be empty";
+                    }else{
+                      return null;
+                    }
+                  },
+                  keyboardType: TextInputType.emailAddress,
+                  style: new TextStyle(
+                    fontFamily: "Poppins",
+                  ),
                 ),
               ),
-              TextField(
-                onChanged: (text) {
-                  loginpassword = text;
-                },
-                obscureText: true,
-                cursorColor: kPrimaryColor,
-                decoration: InputDecoration(
-                  hintText: "Password",
-                  icon: Icon(
-                    Icons.lock,
-                    color: kPrimaryColor,
+              Container(
+                margin: EdgeInsets.symmetric(vertical: 10),
+                width: size.width * 0.8,
+                child: TextFormField(
+                  obscureText: _obscureText,
+                  onChanged: (text) {
+                    loginpassword = text;
+                  },
+                  decoration: InputDecoration(
+                    prefixIcon: IconButton(
+                      color: kPrimaryColor,
+                      icon: Icon(Icons.vpn_key_outlined),
+                      onPressed: (){
+                        _toggle();
+                      },
+                    ),
+                    labelText: "Enter Password",
+                    fillColor: Colors.white,
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(30.0),
+                      borderSide: BorderSide(color: Colors.blue, width: 2.0),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(30.0),
+                      borderSide: BorderSide(color: kPrimaryLightColor, width: 2.0),
+                    ),
                   ),
-                  suffixIcon: Icon(
-                    Icons.visibility,
-                    color: kPrimaryColor,
+                  validator: (val) {
+                    if(val.length==0) {
+                      return "Password cannot be empty";
+                    }else{
+                      return null;
+                    }
+                  },
+                  keyboardType: TextInputType.emailAddress,
+                  style: new TextStyle(
+                    fontFamily: "Poppins",
                   ),
-                  border: InputBorder.none,
                 ),
               ),
               RoundedButton(
