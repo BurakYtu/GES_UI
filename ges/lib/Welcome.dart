@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:ges/rounded_button.dart';
 import '../theme.dart';
 import 'Signup.dart';
 import 'login.dart';
@@ -17,39 +16,65 @@ class WelcomeScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Text(
-                "WELCOME TO GES",
-                style: TextStyle(fontWeight: FontWeight.bold),
+                "WELCOME TO",
+                style: TextStyle(fontWeight: FontWeight.w400, fontSize: 25),
+              ),
+              Text(
+                "GES MONITORING",
+                style: TextStyle(fontWeight: FontWeight.w400, fontSize: 30),
               ),
               SizedBox(height: size.height * 0.05),
               SvgPicture.asset("lib/assets/welcome.svg", height: size.height * 0.25,),
               SizedBox(height: size.height * 0.05),
-              RoundedButton(
-                text: "LOGIN",
-                press: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) {
-                        return LogInScreen();
-                      },
+              Container(
+                margin: EdgeInsets.symmetric(vertical: 10),
+                width: size.width * 0.8,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(30),
+                  child: FlatButton(
+                    padding: EdgeInsets.symmetric(vertical: 20, horizontal: 40),
+                    color: kPrimaryColor,
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return LogInScreen();
+                          },
+                        ),
+                      );
+                    },
+                    child: Text(
+                      "LOGIN",
+                      style: TextStyle(color: Colors.white),
                     ),
-                  );
-                },
+                  ),
+                ),
               ),
-              RoundedButton(
-                text: "SIGN UP",
-                color: kPrimaryLightColor,
-                textColor: Colors.black,
-                press: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) {
-                        return SignUpScreen();
-                      },
+              Container(
+                margin: EdgeInsets.symmetric(vertical: 10),
+                width: size.width * 0.8,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(30),
+                  child: FlatButton(
+                    padding: EdgeInsets.symmetric(vertical: 20, horizontal: 40),
+                    color: kPrimaryLightColor,
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return SignUpScreen();
+                          },
+                        ),
+                      );
+                    },
+                    child: Text(
+                      "SIGN UP",
+                      style: TextStyle(color: Colors.black),
                     ),
-                  );
-                },
+                  ),
+                ),
               ),
             ],
           ),

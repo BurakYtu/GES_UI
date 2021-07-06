@@ -35,12 +35,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
               ),
               SizedBox(height: size.height * 0.03),
-              SvgPicture.asset("lib/assets/signup.svg", height: size.height * 0.2,),
+              SvgPicture.asset("lib/assets/signup.svg", height: size.height * 0.18,),
               SizedBox(height: size.height * 0.04),
               Container(
                 margin: EdgeInsets.symmetric(vertical: 10),
                 width: size.width * 0.8,
                 child: TextFormField(
+                  style: new TextStyle(
+                    fontFamily: "Poppins",
+                  ),
                   onChanged: (text) {
                     email = text;
                   },
@@ -50,30 +53,23 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     labelText: "Enter Email",
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(30.0),
-                      borderSide: BorderSide(color: Colors.blue, width: 2.0),
+                      borderSide: BorderSide(color: Colors.blue.withOpacity(0.3), width: 2.0),
                     ),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(30.0),
                       borderSide: BorderSide(color: kPrimaryLightColor, width: 2.0),
                     ),
                   ),
-                  validator: (val) {
-                    if(val.length==0) {
-                      return "Email cannot be empty";
-                    }else{
-                      return null;
-                    }
-                  },
                   keyboardType: TextInputType.emailAddress,
-                  style: new TextStyle(
-                    fontFamily: "Poppins",
-                  ),
                 ),
               ),
               Container(
                 margin: EdgeInsets.symmetric(vertical: 10),
                 width: size.width * 0.8,
                 child: TextFormField(
+                  style: new TextStyle(
+                    fontFamily: "Poppins",
+                  ),
                   obscureText: _obscureText,
                   onChanged: (text) {
                     password = text;
@@ -90,34 +86,24 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     fillColor: Colors.white,
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(30.0),
-                      borderSide: BorderSide(color: Colors.blue, width: 2.0),
+                      borderSide: BorderSide(color: Colors.blue.withOpacity(0.3), width: 2.0),
                     ),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(30.0),
                       borderSide: BorderSide(color: kPrimaryLightColor, width: 2.0),
                     ),
                   ),
-                  validator: (val) {
-                    if(val.length==0) {
-                      return "Password cannot be empty";
-                    }else{
-                      return null;
-                    }
-                  },
-                  keyboardType: TextInputType.emailAddress,
-                  style: new TextStyle(
-                    fontFamily: "Poppins",
-                  ),
+                  //keyboardType: TextInputType.visiblePassword,
                 ),
               ),
-              Container(
-                margin: EdgeInsets.symmetric(vertical: 10),
-                width: size.width * 0.8,
-                height: size.width * 0.15,
-                child: OutlinedButton(
-                  style: ButtonStyle(
-                    shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0))),
-                  ),
+            Container(
+              margin: EdgeInsets.symmetric(vertical: 10),
+              width: size.width * 0.8,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(30),
+                child: FlatButton(
+                  padding: EdgeInsets.symmetric(vertical: 20, horizontal: 40),
+                  color: kPrimaryLightColor,
                   onPressed: () async {
                     try {
                       UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
@@ -126,7 +112,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       );
                       showDialog(context: context, builder: (BuildContext context) => AlertDialog(
                         title: const Text('Done'),
-                        content: const Text('Welcome to our world!'),
+                        content: const Text('Registration successful, please login.'),
                         actions: <Widget>[
                           TextButton(
                             onPressed: () {
@@ -139,15 +125,41 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 ),
                               );
                             },
-                            child: const Text('Thanks :)'),
+                            child: const Text('OK'),
                           ),
                         ],
                       ),
                       );
                     } on FirebaseAuthException catch (e) {
+                      if (e.code == 'weak-password' || password.length < 6) {
+                        showDialog(context: context, builder: (BuildContext context) => AlertDialog(
+                          title: const Text('Error'),
+                          content: const Text('Please make sure your password longer than 6 character.'),
+                          actions: <Widget>[
+                            TextButton(
+                              onPressed: () => Navigator.pop(context),
+                              child: const Text('try again'),
+                            ),
+                          ],
+                        ),
+                        );
+                      } else if (e.code == 'email-already-in-use') {
+                        showDialog(context: context, builder: (BuildContext context) => AlertDialog(
+                          title: const Text('Error'),
+                          content: const Text('Email already in use.'),
+                          actions: <Widget>[
+                            TextButton(
+                              onPressed: () => Navigator.pop(context),
+                              child: const Text('try again'),
+                            ),
+                          ],
+                        ),
+                        );
+                      }
+                    } catch (e) {
                       showDialog(context: context, builder: (BuildContext context) => AlertDialog(
                         title: const Text('Error'),
-                        content: const Text('we have a problem guys'),
+                        content: e,
                         actions: <Widget>[
                           TextButton(
                             onPressed: () => Navigator.pop(context),
@@ -156,18 +168,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ],
                       ),
                       );
-                      if (e.code == 'weak-password') {
-                        print('The password provided is too weak.');
-                      } else if (e.code == 'email-already-in-use') {
-                        print('The account already exists for that email.');
-                      }
-                    } catch (e) {
-                      print(e);
                     }
                   },
-                  child: Text("Sing Up"),
+                  child: Text(
+                    "Sing Up",
+                    style: TextStyle(color: Colors.black),
+                  ),
                 ),
               ),
+            ),
               SizedBox(height: size.height * 0.03),
               AlreadyHaveAnAccountCheck(
                 login: false,
