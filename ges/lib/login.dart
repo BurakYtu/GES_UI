@@ -1,10 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:ges/Welcome.dart';
 import 'package:ges/theme.dart';
 import 'Signup.dart';
 import 'already_have_an_account_acheck.dart';
+import 'homepage.dart';
 
 class LogInScreen extends StatefulWidget {
   @override
@@ -104,7 +104,7 @@ class _LogInScreenState extends State<LogInScreen> {
                   borderRadius: BorderRadius.circular(30),
                   child: FlatButton(
                     padding: EdgeInsets.symmetric(vertical: 20, horizontal: 40),
-                    color: kPrimaryLightColor,
+                    color: kPrimaryColor,
                     onPressed: () async {
                       try {
                         UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
@@ -117,14 +117,11 @@ class _LogInScreenState extends State<LogInScreen> {
                           actions: <Widget>[
                             TextButton(
                               onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) {
-                                      return WelcomeScreen();
-                                    },
-                                  ),
-                                );
+                                Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
+                                  builder: (context) {
+                                    return Homepage();
+                                  },
+                                ), (Route<dynamic> route) => false,);
                               },
                               child: const Text('Take me'),
                             ),
@@ -184,7 +181,7 @@ class _LogInScreenState extends State<LogInScreen> {
                     },
                     child: Text(
                       "Sing In",
-                      style: TextStyle(color: Colors.black),
+                      style: TextStyle(color: Colors.white),
                     ),
                   ),
                 ),
@@ -192,7 +189,11 @@ class _LogInScreenState extends State<LogInScreen> {
               SizedBox(height: size.height * 0.03),
               AlreadyHaveAnAccountCheck(
                 press: () {
-                  Navigator.pop(context);
+                  Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
+                    builder: (context) {
+                      return SignUpScreen();
+                    },
+                  ), (Route<dynamic> route) => false,);
                 },
               ),
             ],

@@ -27,7 +27,7 @@ class SideBar extends StatelessWidget{
                 ),),
               currentAccountPicture: CircleAvatar(
                 child: ClipOval(
-                  child: Image(image: AssetImage('assets/fourx.PNG'),
+                  child: Image(image: AssetImage('lib/assets/fourx.PNG'),
                     width: 80,
                     height: 80,
                     fit: BoxFit.cover,
@@ -36,7 +36,7 @@ class SideBar extends StatelessWidget{
               ),
               decoration: BoxDecoration(
                   image: DecorationImage(
-                      image: AssetImage('assets/plant.PNG'),
+                      image: AssetImage('lib/assets/plant.PNG'),
                       fit: BoxFit.cover
                   )
               ),

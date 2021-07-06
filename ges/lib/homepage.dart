@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'myflexiableappbar.dart';
-import 'myappbar.dart';
 import 'package:ges/sidebar.dart';
 import 'detail_1_page.dart';
 import 'detail_2_page.dart';
@@ -15,7 +13,6 @@ class Homepage extends StatefulWidget {
 }
 
 class _HomepageState extends State<Homepage> {
-
   static const List<List<String>> PVSections = [
     [
       'https://senerji.istanbul/wp-content/uploads/2021/03/roof-top-solar-1-1170x820-1.jpg',
@@ -51,38 +48,62 @@ class _HomepageState extends State<Homepage> {
 
   @override
   Widget build(BuildContext context) {
-
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: Color(0XFF34495E),
-      drawer: SideBar(),
-      body: Container(
-        decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: new Alignment(-1.0, -0.1),
-              end: new Alignment(1.0, 0.5),
-              colors: [
-                const Color(0xFF898989),
-                const Color(0xFF303030),
-              ],
-              stops: [
-                0.0,
-                1.0,
-              ],
-            )
+        extendBody: true,
+        bottomNavigationBar: BottomAppBar(
+          color: Colors.black,
+          shape: CircularNotchedRectangle(),
+          child: Container(
+            height: 50.0,
+          ),
         ),
-        child: Column(
-          children: <Widget>[
-            Container(
-              margin: EdgeInsets.only(bottom: 25),
-              height: 150,
-              child: Stack(
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        floatingActionButton: FloatingActionButton(
+          backgroundColor: Colors.black,
+          child: Center(
+            child: Icon(
+              Icons.add,
+              size: 32.0,
+              color: Colors.white,
+            ),
+          ),
+          onPressed: () {
+          },
+        ),
+        backgroundColor: Colors.white,
+        drawer: SideBar(),
+        appBar: AppBar(
+          iconTheme: IconThemeData(color: Colors.black),
+          elevation: 0,
+          backgroundColor: Colors.white,
+        ),
+        body: Container(
+          height: size.height,
+          decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: new Alignment(-1.0, -0.1),
+                end: new Alignment(1.0, 0.5),
+                colors: [
+                  const Color(0xFF898989),
+                  const Color(0xFF303030),
+                ],
+                stops: [
+                  0.0,
+                  1.0,
+                ],
+              )
+          ),
+          child: SingleChildScrollView(
+            child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Container(
                     padding: EdgeInsets.only(
                       left: 20.0,
                       right: 20.0,
                     ),
-                    //height: 200,
+                    height: size.height * 0.2,
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
                           begin: Alignment.topCenter,
@@ -105,60 +126,77 @@ class _HomepageState extends State<Homepage> {
                         )
                       ],
                     ),
-                  )
+                  ),
+                  Container(
+                    padding: EdgeInsets.only(
+                      bottom: 10.0,
+                      top: 30.0,
+                    ),
+                    height: size.height*0.3,
+                    width: 250,
+                    child: ListView(
+                      padding: EdgeInsets.zero,
+                      scrollDirection: Axis.vertical,
+                      children: <Widget>[
+                        Container(
+                          color: Colors.black.withOpacity(0.6),
+                          height: size.height*0.1,
+                        ),
+                        SizedBox(height: 20),
+                        Container(
+                          color: Colors.black.withOpacity(0.6),
+                          height: size.height*0.1,
+                        ),
+                        SizedBox(height: 20),
+                        Container(
+                          color: Colors.black.withOpacity(0.6),
+                          height: size.height*0.1,
+                        ),
+                        SizedBox(height: 20),
+                        Container(
+                          color: Colors.black.withOpacity(0.6),
+                          height: size.height*0.1,
+                        ),
+                        SizedBox(height: 20),
+                        Container(
+                          color: Colors.black.withOpacity(0.6),
+                          height: size.height*0.1,
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    padding: EdgeInsets.only(
+                      bottom: 20.0,
+                      top: 10.0,
+                    ),
+                    height: size.height*0.25,
+                    width: 250,
+                    child: ListView(
+                      padding: EdgeInsets.zero,
+                      scrollDirection: Axis.horizontal,
+                      children: <Widget>[
+                        Container(
+                          color: Colors.black.withOpacity(0.6),
+                          width: size.height*0.25,
+                        ),
+                        SizedBox(width: 20),
+                        Container(
+                          color: Colors.black.withOpacity(0.6),
+                          width: size.height*0.25,
+                        ),
+                        SizedBox(width: 20),
+                        Container(
+                          color: Colors.black.withOpacity(0.6),
+                          width: size.height*0.25,
+                        ),
+                      ],
+                    ),
+                  ),
                 ],
-              ),
             ),
-            SizedBox(
-              height: 320,
-              width: 300,
-              child: Container(
-                child: Column(
-                    children: <Widget>[
-                      SizedBox(
-                        height: 70,
-                        width: 300,
-                        child: Container(
-                          color: Colors.black.withOpacity(0.6),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      SizedBox(
-                        height: 70,
-                        width: 300,
-                        child: Container(
-                          color: Colors.black.withOpacity(0.6),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      SizedBox(
-                        height: 70,
-                        width: 300,
-                        child: Container(
-                          color: Colors.black.withOpacity(0.6),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      SizedBox(
-                        height: 70,
-                        width: 300,
-                        child: Container(
-                          color: Colors.black.withOpacity(0.6),
-                        ),
-                      ),
-                    ]
-                ),
-              ),
-            )
-          ],
-        ),
-      )
+          )
+        )
     );
   }
 }

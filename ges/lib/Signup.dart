@@ -181,7 +181,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
               AlreadyHaveAnAccountCheck(
                 login: false,
                 press: () {
-                  Navigator.pop(context);
+                  Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
+                    builder: (context) {
+                      return LogInScreen();
+                    },
+                  ), (Route<dynamic> route) => false,);
                 },
               ),
             ],
