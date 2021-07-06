@@ -1,18 +1,44 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:charts_flutter/flutter.dart' as charts;
+import 'package:flutter_sparkline/flutter_sparkline.dart';
 import 'package:ges/sidebar.dart';
-import 'detail_1_page.dart';
-import 'detail_2_page.dart';
-import 'detail_3_page.dart';
-import 'detail_4_page.dart';
-import 'detail_5_page.dart';
-import 'detail_6_page.dart';
 
-class Homepage extends StatefulWidget {
-  @override
-  _HomepageState createState() => _HomepageState();
+class HomePage extends StatefulWidget {
+  final Widget child;
+
+  HomePage({Key key, this.child}) : super(key: key);
+
+  _HomePageState createState() => _HomePageState();
 }
 
-class _HomepageState extends State<Homepage> {
+class _HomePageState extends State<HomePage> {
+  List<charts.Series<Task, String>> _seriesPieData;
+
+  _generateData() {
+
+    var piedata = [
+      new Task('Work', 35.8, Color(0xff3366cc)),
+      new Task('Eat', 8.3, Color(0xff6789cd)),
+      new Task('Commute', 10.8, Color(0xff8097c4)),
+      new Task('TV', 15.6, Color(0xffaab5c9)),
+      new Task('Sleep', 19.2, Color(0xffbdc1cb)),
+      new Task('Other', 10.3, Color(0xffd9d9d9)),
+    ];
+
+    _seriesPieData.add(
+      charts.Series(
+        domainFn: (Task task, _) => task.task,
+        measureFn: (Task task, _) => task.taskvalue,
+        colorFn: (Task task, _) =>
+            charts.ColorUtil.fromDartColor(task.colorval),
+        id: 'Air Pollution',
+        data: piedata,
+        labelAccessorFn: (Task row, _) => '${row.taskvalue}',
+      ),
+    );
+  }
+
   static const List<List<String>> PVSections = [
     [
       'https://senerji.istanbul/wp-content/uploads/2021/03/roof-top-solar-1-1170x820-1.jpg',
@@ -46,231 +72,238 @@ class _HomepageState extends State<Homepage> {
     ]
   ];
 
+  var data = [0.2, 0.1, 0.12, 0.31, 0.16, 0.21, 0.7, 0.19, 0.4, 0.08, 0.43];
+  var data2 = [0.0, 0.2, 0.3, 0.42, 0.73, 0.89, 1.1, 1.8, 1.99, 2.39, 2.47, 2.9];
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _seriesPieData = List<charts.Series<Task, String>>();
+    _generateData();
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-        extendBody: true,
-        bottomNavigationBar: BottomAppBar(
-          color: Colors.black,
-          shape: CircularNotchedRectangle(),
-          child: Container(
-            height: 50.0,
+      extendBody: true,
+      bottomNavigationBar: BottomAppBar(
+        color: Colors.black,
+        shape: CircularNotchedRectangle(),
+        child: Container(
+          height: 50.0,
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.black,
+        child: Center(
+          child: Icon(
+            Icons.add,
+            size: 32.0,
+            color: Colors.white,
           ),
         ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        floatingActionButton: FloatingActionButton(
-          backgroundColor: Colors.black,
-          child: Center(
-            child: Icon(
-              Icons.add,
-              size: 32.0,
-              color: Colors.white,
-            ),
-          ),
-          onPressed: () {
-          },
-        ),
+        onPressed: () {
+        },
+      ),
+      backgroundColor: Colors.white,
+      drawer: SideBar(),
+      appBar: AppBar(
+        iconTheme: IconThemeData(color: Colors.black),
+        elevation: 0,
         backgroundColor: Colors.white,
-        drawer: SideBar(),
-        appBar: AppBar(
-          iconTheme: IconThemeData(color: Colors.black),
-          elevation: 0,
-          backgroundColor: Colors.white,
+      ),
+      body: Container(
+        height: size.height,
+        decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: new Alignment(-1.0, -0.1),
+              end: new Alignment(1.0, 0.5),
+              colors: [
+                const Color(0xFF898989),
+                const Color(0xFF303030),
+              ],
+              stops: [
+                0.0,
+                1.0,
+              ],
+            )
         ),
-        body: Container(
-          height: size.height,
-          decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: new Alignment(-1.0, -0.1),
-                end: new Alignment(1.0, 0.5),
-                colors: [
-                  const Color(0xFF898989),
-                  const Color(0xFF303030),
-                ],
-                stops: [
-                  0.0,
-                  1.0,
-                ],
-              )
-          ),
-          child: SingleChildScrollView(
-            child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Container(
-                    padding: EdgeInsets.only(
-                      left: 20.0,
-                      right: 20.0,
-                    ),
-                    height: size.height * 0.2,
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                          begin: Alignment.topCenter,
-                          end: Alignment.bottomCenter,
-                          colors: [
-                            const Color(0xFFffffff),
-                            const Color(0xFFa8a8a8),
-                          ]
+        child: Column(
+            children: <Widget>[
+              Container(
+                padding: EdgeInsets.only(
+                  left: 20.0,
+                  right: 20.0,
+                  top: 0.0,
+                ),
+                height: size.height * 0.2,
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [
+                        const Color(0xFFffffff),
+                        const Color(0xFFa8a8a8),
+                      ]
+                  ),
+                  borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(36),
+                    bottomRight: Radius.circular(36),
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.75),
+                      blurRadius: 20.0,
+                      spreadRadius: 5.0,
+                      offset: Offset(1.0, 1.0), // shadow direction: bottom right
+                    )
+                  ],
+                ),
+                child: ListView(
+                  padding: EdgeInsets.zero,
+                  scrollDirection: Axis.horizontal,
+                  children: <Widget>[
+                    Container(
+                      width: size.height*0.3,
+                      child: charts.PieChart(
+                          _seriesPieData,
+                          animate: true,
+                          animationDuration: Duration(seconds: 1),
+                          defaultRenderer: new charts.ArcRendererConfig(
+                              arcWidth: 20,
+                              arcRendererDecorators: [
+                                new charts.ArcLabelDecorator(
+                                    labelPosition: charts.ArcLabelPosition.outside)
+                              ]
+                          )
                       ),
-                      borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(36),
-                        bottomRight: Radius.circular(36),
+                    ),
+                    Container(
+                      child: Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: Center(
+                            child: Column(
+                              children: <Widget>[
+                                Text("Overall"),
+                                Text("Efficiency"),
+                                SizedBox(height: 30,),
+                                Text("Sunday"),
+                                Text("Monday"),
+                              ],
+                            )
+                        ),
                       ),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black.withOpacity(0.75),
-                          blurRadius: 20.0,
-                          spreadRadius: 5.0,
-                          offset: Offset(1.0, 1.0), // shadow direction: bottom right
-                        )
-                      ],
+                    )
+                  ],
+                ),
+              ),
+              Container(
+                padding: EdgeInsets.only(
+                  bottom: 10.0,
+                  top: 30.0,
+                ),
+                height: size.height*0.3,
+                width: size.width*0.75,
+                child: ListView(
+                  padding: EdgeInsets.zero,
+                  scrollDirection: Axis.vertical,
+                  children: <Widget>[
+                    Container(
+                      color: Colors.black.withOpacity(0.6),
+                      height: size.height*0.1,
                     ),
-                  ),
-                  Container(
-                    padding: EdgeInsets.only(
-                      bottom: 10.0,
-                      top: 30.0,
+                    SizedBox(height: 20),
+                    Container(
+                      color: Colors.black.withOpacity(0.6),
+                      height: size.height*0.1,
                     ),
-                    height: size.height*0.3,
-                    width: 250,
-                    child: ListView(
-                      padding: EdgeInsets.zero,
-                      scrollDirection: Axis.vertical,
-                      children: <Widget>[
-                        Container(
-                          color: Colors.black.withOpacity(0.6),
-                          height: size.height*0.1,
-                        ),
-                        SizedBox(height: 20),
-                        Container(
-                          color: Colors.black.withOpacity(0.6),
-                          height: size.height*0.1,
-                        ),
-                        SizedBox(height: 20),
-                        Container(
-                          color: Colors.black.withOpacity(0.6),
-                          height: size.height*0.1,
-                        ),
-                        SizedBox(height: 20),
-                        Container(
-                          color: Colors.black.withOpacity(0.6),
-                          height: size.height*0.1,
-                        ),
-                        SizedBox(height: 20),
-                        Container(
-                          color: Colors.black.withOpacity(0.6),
-                          height: size.height*0.1,
-                        ),
-                      ],
+                    SizedBox(height: 20),
+                    Container(
+                      color: Colors.black.withOpacity(0.6),
+                      height: size.height*0.1,
                     ),
-                  ),
-                  Container(
-                    padding: EdgeInsets.only(
-                      bottom: 20.0,
-                      top: 10.0,
+                    SizedBox(height: 20),
+                    Container(
+                      color: Colors.black.withOpacity(0.6),
+                      height: size.height*0.1,
                     ),
-                    height: size.height*0.25,
-                    width: 250,
-                    child: ListView(
-                      padding: EdgeInsets.zero,
-                      scrollDirection: Axis.horizontal,
-                      children: <Widget>[
-                        Container(
-                          color: Colors.black.withOpacity(0.6),
-                          width: size.height*0.25,
-                        ),
-                        SizedBox(width: 20),
-                        Container(
-                          color: Colors.black.withOpacity(0.6),
-                          width: size.height*0.25,
-                        ),
-                        SizedBox(width: 20),
-                        Container(
-                          color: Colors.black.withOpacity(0.6),
-                          width: size.height*0.25,
-                        ),
-                      ],
+                    SizedBox(height: 20),
+                    Container(
+                      color: Colors.black.withOpacity(0.6),
+                      height: size.height*0.1,
                     ),
-                  ),
-                ],
-            ),
-          )
-        )
+                  ],
+                ),
+              ),
+              Container(
+                padding: EdgeInsets.only(
+                  bottom: 20.0,
+                  top: 10.0,
+                ),
+                height: size.height*0.25,
+                width: size.width*0.75,
+                child: ListView(
+                  padding: EdgeInsets.zero,
+                  scrollDirection: Axis.horizontal,
+                  children: <Widget>[
+                    Container(
+                      color: Colors.black.withOpacity(0.6),
+                      width: size.height*0.25,
+                      child: Padding(
+                        padding: const EdgeInsets.only(
+                          bottom: 30.0,
+                          top: 30.0,
+                        ),
+                        child: new Sparkline(
+                          data: data,
+                          lineColor: Colors.white,
+                          pointsMode: PointsMode.last,
+                          pointSize: 8.0,
+                        ),
+                      ),
+                    ),
+                    SizedBox(width: 20),
+                    Container(
+                      color: Colors.black.withOpacity(0.6),
+                      width: size.height*0.25,
+                      child: Padding(
+                        padding: const EdgeInsets.only(
+                          bottom: 30.0,
+                          top: 30.0,
+                        ),
+                        child: new Sparkline(
+                          data: data2,
+                          fillMode: FillMode.below,
+                          fillGradient: new LinearGradient(
+                              begin: Alignment.topCenter,
+                              end: Alignment.bottomCenter,
+                              colors: [Colors.lightBlueAccent,Colors.blueGrey]
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(width: 20),
+                    Container(
+                      color: Colors.black.withOpacity(0.6),
+                      width: size.height*0.25,
+                    ),
+                  ],
+                ),
+              ),
+            ],
+        ),
+      ),
     );
   }
 }
 
+class Task {
+  String task;
+  double taskvalue;
+  Color colorval;
 
-Card _buildListItem(BuildContext context, List<String> PVstatus) {
-
-  void sec(){
-    switch(PVstatus[2]){
-      case '1':{
-        Navigator.push(context, MaterialPageRoute(builder: (context) => Detail_1_Page()));
-      }
-      break;
-      case '2':{
-        Navigator.push(context, MaterialPageRoute(builder: (context) => Detail_2_Page()));
-      }
-      break;
-      case '3':{
-        Navigator.push(context, MaterialPageRoute(builder: (context) => Detail_3_Page()));
-      }
-      break;
-      case '4':{
-        Navigator.push(context, MaterialPageRoute(builder: (context) => Detail_4_Page()));
-      }
-      break;
-      case '5':{
-        Navigator.push(context, MaterialPageRoute(builder: (context) => Detail_5_Page()));
-      }
-      break;
-      case '6':{
-        Navigator.push(context, MaterialPageRoute(builder: (context) => Detail_6_Page()));
-      }
-      break;
-      default:{}
-      break;
-    }
-  }
-
-  return Card(
-      margin: const EdgeInsets.all(5),
-      child: new Stack(
-          children: <Widget>[
-            new Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                mainAxisSize: MainAxisSize.max,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  new Image.network(
-                    PVstatus[0],
-                    fit:BoxFit.fill,
-                    width: 125.0,
-                    height: 125.0,
-                  ),
-                  new Text(
-                    PVstatus[1],
-                    style: new TextStyle(fontSize:18.0,
-                        color: const Color(0xFF000000),
-                        fontWeight: FontWeight.w400,
-                        fontFamily: "Roboto"),
-                  )
-                ]
-            ),
-            new FlatButton(key:null, onPressed: sec,
-              child: null,color: Colors.transparent,height: 125,minWidth: 350,),
-          ]
-      )
-  );
+  Task(this.task, this.taskvalue, this.colorval);
 }
-
-/*
-new Image.network(
-                        'https://cdn.icon-icons.com/icons2/2107/PNG/512/file_type_flutter_icon_130599.png',
-                        fit:BoxFit.fill,
-                        width: 100.0,
-                        height: 100.0,
-                      ),
- */

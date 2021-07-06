@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:ges/homepage.dart';
 import 'Welcome.dart';
 
 void main() async {
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: SafeArea(
-        child: WelcomeScreen(),
+        child: HomePage(),
       ),
     );
   }

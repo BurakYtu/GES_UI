@@ -119,7 +119,7 @@ class _LogInScreenState extends State<LogInScreen> {
                               onPressed: () {
                                 Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
                                   builder: (context) {
-                                    return Homepage();
+                                    return HomePage();
                                   },
                                 ), (Route<dynamic> route) => false,);
                               },
