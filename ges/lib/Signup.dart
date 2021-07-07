@@ -171,7 +171,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     }
                   },
                   child: Text(
-                    "Sing Up",
+                    "Sign Up",
                     style: TextStyle(color: Colors.black),
                   ),
                 ),

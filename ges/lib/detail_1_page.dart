@@ -14,7 +14,7 @@ class Detail_1_Page extends StatelessWidget {
         child: Container(
           width: 300,
           height: 600,
-          child: Image.network('https://4.imimg.com/data4/KE/MP/MY-16227556/thermalimage1_solarpanel1_iz-500x500.jpg',),
+          child: Image.network('https://westerninfrared.com/wp-content/uploads/2014/11/Solar-panel.png'),
         ),
       )
   );

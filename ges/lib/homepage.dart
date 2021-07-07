@@ -101,7 +101,7 @@ class _HomePageState extends State<HomePage> {
 
   static const List<List<String>> PVSections = [
     [
-      'https://4.imimg.com/data4/KE/MP/MY-16227556/thermalimage1_solarpanel1_iz-500x500.jpg',
+      'https://westerninfrared.com/wp-content/uploads/2014/11/Solar-panel.png',
       'Abnormal Temperatures',
       '41.052350, 29.011934',
       '1',
@@ -148,6 +148,25 @@ class _HomePageState extends State<HomePage> {
         shape: CircularNotchedRectangle(),
         child: Container(
           height: 50.0,
+          child: Padding(
+            padding: const EdgeInsets.only(
+              left: 15,
+              right: 15,
+            ),
+            child: Center(
+              child: Row(
+                //mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  IconButton(onPressed: (){}, icon: Icon(Icons.mail_outline, size:20, color: Colors.white)),
+                  IconButton(onPressed: (){}, icon: Icon(Icons.access_time_rounded, size:20, color: Colors.white)),
+                  SizedBox(width: 50),
+                  IconButton(onPressed: (){}, icon: Icon(Icons.account_tree_rounded, size:20, color: Colors.white)),
+                  IconButton(onPressed: (){}, icon: Icon(Icons.add_call, size:20, color: Colors.white)),
+                ],
+              ),
+            ),
+          ),
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
@@ -222,7 +241,7 @@ class _HomePageState extends State<HomePage> {
                   scrollDirection: Axis.horizontal,
                   children: <Widget>[
                     Container(
-                      width: size.height*0.3,
+                      width: size.width*0.6,
                       child: charts.PieChart(
                           _seriesPieData,
                           animate: true,
@@ -249,16 +268,23 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                     Container(
+                      height: size.height * 0.1,
                       child: Padding(
-                        padding: const EdgeInsets.all(20.0),
+                        padding: const EdgeInsets.all(1.0),
                         child: Center(
                             child: Column(
                               children: <Widget>[
-                                Text("Overall"),
-                                Text("Efficiency"),
-                                SizedBox(height: 30,),
-                                Text("Sunday"),
-                                Text("Monday"),
+                                Text("Weekly", style: TextStyle(fontSize: 20),),
+                                Text("Saved", style: TextStyle(fontSize: 20),),
+                                SizedBox(height: 10,),
+                                Text(
+                                    "\u002B24.93\u0025",
+                                    style: const TextStyle(
+                                        color: Colors.blue,
+                                        fontFamily: 'Poppins',
+                                        fontSize: 25.0
+                                    )
+                                ),
                               ],
                             )
                         ),
@@ -426,9 +452,8 @@ Card _buildListItem(BuildContext context, List<String> PVstatus) {
                 children: <Widget>[
                   Image.network(
                     PVstatus[0],
-                    fit:BoxFit.fill,
-                    width: 125.0,
-                    height: 125.0,
+                    fit:BoxFit.fitWidth,
+                    width: 100.0,
                   ),
                   Expanded(
                     child: Padding(
@@ -439,17 +464,17 @@ Card _buildListItem(BuildContext context, List<String> PVstatus) {
                         children: [
                           Text(
                             PVstatus[1],
-                            style: new TextStyle(fontSize:14.0,
+                            style: new TextStyle(fontSize:13.0,
                                 color: Colors.white,
                                 fontWeight: FontWeight.w400,
                                 fontFamily: "Roboto"),
                           ),
                           SizedBox(
-                            height: 20.0,
+                            height: 10.0,
                           ),
                           Text(
                             PVstatus[2],
-                            style: new TextStyle(fontSize:14.0,
+                            style: new TextStyle(fontSize:12.0,
                                 color: Colors.white,
                                 fontWeight: FontWeight.w400,
                                 fontFamily: "Roboto"),

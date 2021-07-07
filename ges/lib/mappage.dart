@@ -84,7 +84,7 @@ class MapPage extends StatelessWidget {
           ),
             SizedBox(height: 30.0,),
             DefaultTabController(
-              length: 3,
+              length: 2,
                 child: Column(children: [
                   TabBar(
                     indicatorColor: Color(0xFFFFFFFF),
@@ -92,9 +92,6 @@ class MapPage extends StatelessWidget {
                     labelColor: Color(0xFFFFFFFF),
                     labelPadding: EdgeInsets.symmetric(horizontal: 8.0),
                     tabs: [
-                      Tab(
-                        text: "Dene",
-                      ),
                       Tab(
                         text: "Yesterday",
                       ),
@@ -108,10 +105,6 @@ class MapPage extends StatelessWidget {
                     height: 350.0,
                     child: TabBarView(
                       children: [
-                        Container(
-                          height: 250,
-                          child: Image.network('https://picsum.photos/250?image=9',fit: BoxFit.cover,),
-                        ),
                         Container(
                           child: new FlutterMap(
                             options: new MapOptions(
