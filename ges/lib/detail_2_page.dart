@@ -14,7 +14,7 @@ class Detail_2_Page extends StatelessWidget {
         child: Container(
           width: 300,
           height: 600,
-          child: Image.network('https://socalsolarpro.com/wp-content/uploads/2017/05/Solar-Bird-Poop-Cleaning.jpg'),
+          child: Image.network('https://senerji.istanbul/wp-content/uploads/2021/03/roof-top-solar-1-1170x820-1.jpg'),
         ),
       )
   );

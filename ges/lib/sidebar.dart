@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'mappage.dart';
 import 'analyticspage.dart';
@@ -9,25 +10,25 @@ class SideBar extends StatelessWidget{
   Widget build(BuildContext context){
     return Drawer(
       child: Material(
-        color: Color(0XFF34495E),
+        color: Color(0xFF898989),
         child: ListView(
           children: [
             UserAccountsDrawerHeader(
               accountName: Text(
-                '4X ARGE GES',
+                'SIMULAB GES',
                 style: TextStyle(
                     fontWeight: FontWeight.w900,
                     fontSize: 21
                 ),),
               accountEmail: Text(
-                'info@4xarge.com',
+                'user@simulab.com',
                 style: TextStyle(
                     fontWeight: FontWeight.w900,
                     fontSize: 14
                 ),),
               currentAccountPicture: CircleAvatar(
                 child: ClipOval(
-                  child: Image(image: AssetImage('lib/assets/fourx.PNG'),
+                  child: Image(image: AssetImage('lib/assets/simulab.png'),
                     width: 80,
                     height: 80,
                     fit: BoxFit.cover,
@@ -37,6 +38,7 @@ class SideBar extends StatelessWidget{
               decoration: BoxDecoration(
                   image: DecorationImage(
                       image: AssetImage('lib/assets/plant.PNG'),
+                      colorFilter: ColorFilter.mode(Colors.black38, BlendMode.darken),
                       fit: BoxFit.cover
                   )
               ),

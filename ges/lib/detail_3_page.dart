@@ -14,7 +14,7 @@ class Detail_3_Page extends StatelessWidget {
         child: Container(
           width: 300,
           height: 600,
-          child: Image.network('https://4.imimg.com/data4/KE/MP/MY-16227556/thermalimage1_solarpanel1_iz-500x500.jpg'),
+          child: Image.network('https://abjdrones.com/wp-content/uploads/2018/04/Thermal-Solar-Panel-Inspection-Services_2.jpg'),
         ),
       )
   );
