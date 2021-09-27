@@ -1,11 +1,23 @@
 import 'dart:io';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:ges/homepage.dart';
 import 'mappage.dart';
 import 'analyticspage.dart';
 import 'infopage.dart';
 
 class SideBar extends StatelessWidget{
+
+  /*
+  final Function(User) onSignOut;
+  SideBar({@required this.onSignOut});
+
+  Future<void>logout()async{
+    await FirebaseAuth.instance.signOut();
+    onSignOut(null);
+  }
+  */
   @override
   Widget build(BuildContext context){
     return Drawer(
