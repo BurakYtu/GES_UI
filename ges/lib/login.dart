@@ -5,7 +5,6 @@ import 'package:ges/theme.dart';
 import 'Signup.dart';
 import 'already_have_an_account_acheck.dart';
 import 'homepage.dart';
-final FirebaseAuth auth = FirebaseAuth.instance;
 
 class LogInScreen extends StatefulWidget {
   @override
@@ -16,8 +15,6 @@ class _LogInScreenState extends State<LogInScreen> {
   String loginemail = "";
   String loginpassword = "";
   bool _obscureText = true;
-
-  final User user = auth.currentUser;
 
   void _toggle() {
     setState(() {
@@ -114,8 +111,6 @@ class _LogInScreenState extends State<LogInScreen> {
                           email: loginemail,
                           password: loginpassword,
                         );
-                        final uid = user.uid;
-                        print("User Credential : " + uid);
                         showDialog(context: context, builder: (BuildContext context) => AlertDialog(
                           title: const Text('Done'),
                           content: const Text('Welcome'),
